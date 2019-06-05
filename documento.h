@@ -9,56 +9,44 @@ using std::pair;
 using std::string;
 using std::map;
 
-//Usado para calcular a norma de um vetor a partir de suas dimensıes
-double Calcula_Norma (map <string, double> W){
-	double norma_elevado_2 = 0;
-	for (auto i : W){
-		norma_elevado_2 += pow(i.second,2);
-	}
-	return sqrt(norma_elevado_2);
-}
-
-
 
 class documento
 {
     public:
-        // ConstrutÛi um vetor documento nulo
+        // Constr√≥i um vetor documento nulo
         documento ();
-        documento(string nome);
-        // ConstrutÛi o objeto com um map de tf n„o normalizado como argumento
+        // Constr√≥i o objeto com um map de tf n√£o normalizado como argumento
         documento(string nome, map <string, double> &tf);
-        documento(map <string, double> &tf);
-        //Com o tf normalizado, calcula a dimens„o em cada eixo e carrega o valor da norma
-        //PrÈ-condiÁ„o: O argumento tem que ser o map idf da coleÁ„o de documentos e o tf tem que estar normalizado
+        //Calcula a dimens√£o em cada eixo e carrega o valor da norma
         void dimensionar(const map <string, double> &idf);
         //retorna o produto escalar de dois documentos
-        // prÈ-condiÁ„o - o objeto tem que estar com as dimensıes carregadas
-        double produto_escalar (const documento& x) const;
+        // pr√©-condi√ß√£o - o objeto tem que estar com as dimens√µes carregadas
+        double produto_escalar (const std::map<string, double> &p) const;
         // Retorna a similaridade entre dois vetores documentos
-        // prÈ-condiÁ„o - o objeto tem que estar com as dimensıes carregadas 
+        // pr√©-condi√ß√£o - o objeto tem que estar com as dimens√µes carregadas
         double cosseno (const documento& x) const;
         // Retorna a norma do documento
-        // prÈ-condiÁ„o - o objeto tem que estar com as dimensıes carregadas 
+        // pr√©-condi√ß√£o - o objeto tem que estar com as dimens√µes carregadas
         double norma () const;
         //Verifica se alguma palavra  de um conjunto de palavras pertence ao documento
         bool pertence (const string pesquisa) const;
-        //Verifica se as dimensıes est„o carregadas
+        //Verifica se as dimens√µes est√£o carregadas
         bool coordenadas_w_carregada () const;
-        //retorn o nome do documento
+        //retorna o nome do documento
         string nome () const;
+        map<string, double> map();
         void operator= (const documento& x);
-        
+
     private:
 		// Armazena o nome do documento
         string nome_;
-        /* Armazena as coordenadas do vetor em cada eixo. Para isso, È necess·rio trÍs etapas:
+        /* Armazena as coordenadas do vetor em cada eixo. Para isso, √© necess√°rio tr√™s etapas:
         1 - Carregar esse map com as palavras e a taxa de frequencia que ela aparece no documento
-        2 - Carregar as dimensıes multiplicando o tf pelo idf normalizado pela freq_max de cada palavra*/
-		map<string, double> w_;
+        2 - Carregar as dimens√µes multiplicando o tf pelo idf normalizado pela freq_max de cada palavra*/
+		std::map<string, double> w_;
         //Verifica se o tf foi normalizado
         bool coordenadas_w_carregada_;
-        //Essa vari·vel guarda a norma do vetor documento
+        //Essa vari√°vel guarda a norma do vetor documento
         double norma_;
 };
 
