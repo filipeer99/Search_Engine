@@ -10,7 +10,6 @@
 #include <fstream>
 #include <algorithm>
 #include "documento.h"
-
 using namespace std;
 
 void formatar (string &palavra)
